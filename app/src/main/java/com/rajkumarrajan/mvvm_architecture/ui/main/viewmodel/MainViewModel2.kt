@@ -1,18 +1,16 @@
 package com.rajkumarrajan.mvvm_architecture.ui.main.viewmodel
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.rajkumarrajan.mvvm_architecture.data.model.Customer
-import com.rajkumarrajan.mvvm_architecture.data.model.User
-import com.rajkumarrajan.mvvm_architecture.data.repository.MainRepository
+import com.rajkumarrajan.mvvm_architecture.data.repository.MainRepository2
 import com.rajkumarrajan.mvvm_architecture.utils.Resource
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 //before MAIN ACTIVITY
 
-class MainViewModel2(private val mainRepository: MainRepository) : ViewModel() {
+class MainViewModel2(private val mainRepository2: MainRepository2) : ViewModel() {
 
     private val customers = MutableLiveData<Resource<List<Customer>>>()
 
@@ -22,7 +20,7 @@ class MainViewModel2(private val mainRepository: MainRepository) : ViewModel() {
     fun fetchCustomers() {
         customers.postValue(Resource.loading(null))
         compositeDisposable.add(
-            mainRepository.getCustomers()
+            mainRepository2.getCustomers()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({ customerslist ->

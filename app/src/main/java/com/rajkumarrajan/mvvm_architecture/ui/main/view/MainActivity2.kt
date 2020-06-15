@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.activity_main2.*
 
 class MainActivity2 : AppCompatActivity() {
     private lateinit var mainViewModel2: MainViewModel2
-    private lateinit var adapter: MainAdapter2
+    private lateinit var adapter2: MainAdapter2
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,14 +43,14 @@ class MainActivity2 : AppCompatActivity() {
 
     private fun setupUI() {
         recyclerView2.layoutManager = LinearLayoutManager(this)
-        adapter = MainAdapter2(arrayListOf())
+        adapter2 = MainAdapter2(arrayListOf())
         recyclerView2.addItemDecoration(
             DividerItemDecoration(
                 recyclerView2.context,
                 (recyclerView2.layoutManager as LinearLayoutManager).orientation
             )
         )
-        recyclerView2.adapter = adapter
+        recyclerView2.adapter = adapter2
     }
 
     private fun setupAPICall() {
@@ -76,8 +76,8 @@ class MainActivity2 : AppCompatActivity() {
     }
 
     private fun renderList(customers: List<Customer>) {
-        adapter.addData(customers)
-        adapter.notifyDataSetChanged()
+        adapter2.addData(customers)
+        adapter2.notifyDataSetChanged()
     }
 
     private fun setupViewModel() {

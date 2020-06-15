@@ -18,7 +18,7 @@ class MainAdapter2(
     class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(customer: Customer) {
             Glide.with(itemView.imageViewAvatar.context)
-                .load(customer.avatar_url)
+                .load(customer.avatar)
                 .into(itemView.imageViewAvatarr)
         }
     }
