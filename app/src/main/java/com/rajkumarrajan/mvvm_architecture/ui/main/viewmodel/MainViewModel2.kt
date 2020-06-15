@@ -12,23 +12,23 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 //before MAIN ACTIVITY
 
-class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
+class MainViewModel2(private val mainRepository: MainRepository) : ViewModel() {
 
-    private val users = MutableLiveData<Resource<List<User>>>()
+    private val customers = MutableLiveData<Resource<List<Customer>>>()
 
 
     private val compositeDisposable = CompositeDisposable()
 
-    fun fetchUsers() {
-        users.postValue(Resource.loading(null))
+    fun fetchCustomers() {
+        customers.postValue(Resource.loading(null))
         compositeDisposable.add(
-            mainRepository.getUsers()
+            mainRepository.getCustomers()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ userList ->
-                    users.postValue(Resource.success(userList))
+                .subscribe({ customerslist ->
+                    customers.postValue(Resource.success(customerslist))
                 }, {
-                    users.postValue(Resource.error("Something Went Wrong", null))
+                    customers.postValue(Resource.error("Something Went Wrong", null))
                 })
         )
     }
@@ -38,8 +38,8 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
         compositeDisposable.dispose()
     }
 
-    fun getUsers(): LiveData<Resource<List<User>>> {
-        return users
+    fun getCustomers(): MutableLiveData<Resource<List<Customer>>> {
+        return customers
     }
 
 }

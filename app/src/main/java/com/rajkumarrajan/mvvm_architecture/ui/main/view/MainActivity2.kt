@@ -11,25 +11,30 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.rajkumarrajan.mvvm_architecture.R
 import com.rajkumarrajan.mvvm_architecture.data.api.ApiHelper
 import com.rajkumarrajan.mvvm_architecture.data.api.ApiServiceImpl
-import com.rajkumarrajan.mvvm_architecture.data.model.User
+import com.rajkumarrajan.mvvm_architecture.data.model.Customer
 import com.rajkumarrajan.mvvm_architecture.ui.base.ViewModelFactory
+import com.rajkumarrajan.mvvm_architecture.ui.base.ViewModelFactory2
 import com.rajkumarrajan.mvvm_architecture.ui.main.adapter.MainAdapter
+import com.rajkumarrajan.mvvm_architecture.ui.main.adapter.MainAdapter2
 import com.rajkumarrajan.mvvm_architecture.ui.main.viewmodel.MainViewModel
+import com.rajkumarrajan.mvvm_architecture.ui.main.viewmodel.MainViewModel2
 import com.rajkumarrajan.mvvm_architecture.utils.Status
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.progressBar
+import kotlinx.android.synthetic.main.activity_main2.*
 
 //then MAIN VIEW MODEL
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var mainViewModel: MainViewModel
-    private lateinit var adapter: MainAdapter
+class MainActivity2 : AppCompatActivity() {
+    private lateinit var mainViewModel2: MainViewModel2
+    private lateinit var adapter: MainAdapter2
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
 
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_main2)
 
         setupUI()
         setupViewModel()
@@ -37,28 +42,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupUI() {
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        adapter = MainAdapter(arrayListOf())
-        recyclerView.addItemDecoration(
+        recyclerView2.layoutManager = LinearLayoutManager(this)
+        adapter = MainAdapter2(arrayListOf())
+        recyclerView2.addItemDecoration(
             DividerItemDecoration(
-                recyclerView.context,
-                (recyclerView.layoutManager as LinearLayoutManager).orientation
+                recyclerView2.context,
+                (recyclerView2.layoutManager as LinearLayoutManager).orientation
             )
         )
-        recyclerView.adapter = adapter
+        recyclerView2.adapter = adapter
     }
 
     private fun setupAPICall() {
-        mainViewModel.getUsers().observe(this, Observer {
+        mainViewModel2.getCustomers().observe(this, Observer {
             when (it.status) {
                 Status.SUCCESS -> {
                     progressBar.visibility = View.GONE
-                    it.data?.let { usersData -> renderList(usersData) }
-                    recyclerView.visibility = View.VISIBLE
+                    it.data?.let { customersdata -> renderList(customersdata) }
+                    recyclerView2.visibility = View.VISIBLE
                 }
                 Status.LOADING -> {
                     progressBar.visibility = View.VISIBLE
-                    recyclerView.visibility = View.GONE
+                    recyclerView2.visibility = View.GONE
                 }
                 Status.ERROR -> {
                     //Handle Error
@@ -67,18 +72,18 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
-        mainViewModel.fetchUsers()
+        mainViewModel2.fetchCustomers()
     }
 
-    private fun renderList(users: List<User>) {
-        adapter.addData(users)
+    private fun renderList(customers: List<Customer>) {
+        adapter.addData(customers)
         adapter.notifyDataSetChanged()
     }
 
     private fun setupViewModel() {
-        mainViewModel = ViewModelProviders.of(
+        mainViewModel2 = ViewModelProviders.of(
             this,
-            ViewModelFactory(ApiHelper(ApiServiceImpl()))
-        ).get(MainViewModel::class.java)
+            ViewModelFactory2(ApiHelper(ApiServiceImpl()))
+        ).get(MainViewModel2::class.java)
     }
 }

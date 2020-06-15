@@ -5,12 +5,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.rajkumarrajan.mvvm_architecture.data.api.ApiHelper
 import com.rajkumarrajan.mvvm_architecture.data.repository.MainRepository
 import com.rajkumarrajan.mvvm_architecture.ui.main.viewmodel.MainViewModel
+import com.rajkumarrajan.mvvm_architecture.ui.main.viewmodel.MainViewModel2
 
-class ViewModelFactory  (private val apiHelper: ApiHelper) : ViewModelProvider.Factory {
+class ViewModelFactory2  (private val apiHelper: ApiHelper) : ViewModelProvider.Factory {
 
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(MainViewModel::class.java)) {
-            return MainViewModel(MainRepository(apiHelper)) as T
+        if (modelClass.isAssignableFrom(MainViewModel2::class.java)) {
+            return MainViewModel2(MainRepository(apiHelper)) as T
         }
         throw IllegalArgumentException("Unknown class name")
     }
