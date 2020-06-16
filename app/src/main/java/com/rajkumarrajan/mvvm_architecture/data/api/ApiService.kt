@@ -9,6 +9,6 @@ import retrofit2.http.GET
 interface ApiService {
     @GET("users")
     fun getUsers(): Single<List<User>>
-    @GET("customers")
+    @GET("orgs")
     fun getCustomers():Single<List<Customer>>
 }

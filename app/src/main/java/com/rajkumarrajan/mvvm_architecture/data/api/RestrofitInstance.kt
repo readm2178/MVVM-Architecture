@@ -16,7 +16,7 @@ object RetrofitInstance {
     private val BASE_URL = "https://5e510330f2c0d300147c034c.mockapi.io/"
     val BASE_URL_List = "https://5e510330f2c0d300147c034c.mockapi.io/"
     //new
-    val NEW_URL="https://api.github.com/users/hadley/orgs/"
+    val NEW_URL="https://api.github.com/users/hadley/"
 
     //public static final String API_BASE_URL = "http://keantrolley.bbapi.co/stations/";
     private val httpClient = OkHttpClient()

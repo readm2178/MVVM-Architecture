@@ -4,6 +4,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.Coil
+import coil.ImageLoader
+import coil.ImageLoader.Companion.Builder
+import coil.request.LoadRequest
+import coil.request.LoadRequest.Companion.Builder
 import com.bumptech.glide.Glide
 import com.rajkumarrajan.mvvm_architecture.R
 import com.rajkumarrajan.mvvm_architecture.data.model.Customer
@@ -17,9 +22,15 @@ class MainAdapter2(
 
     class DataViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(customer: Customer) {
-            Glide.with(itemView.imageViewAvatar.context)
-                .load(customer.avatar)
-                .into(itemView.imageViewAvatarr)
+            val imageLoader = Coil.imageLoader(itemView.imageViewAvatarr.context)
+            val request = LoadRequest.Builder(itemView.context)
+                .data(customer.avatar)
+                .target(itemView.imageViewAvatarr)
+                .build()
+            imageLoader.execute(request)
+//            Glide.with(itemView.imageViewAvatarr.context)
+//                .load(customer.avatar)
+//                .into(itemView.imageViewAvatarr)
         }
     }
 
